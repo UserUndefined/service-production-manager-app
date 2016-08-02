@@ -46,16 +46,16 @@
                 </md-input-container>
                 <md-input-container class="md-block">
                     <label>Email</label>
-                    <input name="customerEmail" type="email" class="validate" ng-model="customer.email">
+                    <input name="customerEmail" type="email" class="validate" ng-model="customer.email" ng-pattern="/^.+@.+\..+$/">
                     <div ng-messages="customerNewForm.customerEmail.$error">
                         <div ng-message="pattern">Invalid email address.</div>
                     </div>
                 </md-input-container>
                 <md-input-container class="md-block">
                     <label>Url</label>
-                    <input name="customerUrl" type="url" class="validate" required ng-model="customer.url">
+                    <input name="customerUrl" type="url" class="validate" ng-model="customer.url">
                     <div ng-messages="customerNewForm.customerUrl.$error">
-                        <div ng-message="pattern">Invalid url.</div>
+                        <div ng-message="url">Invalid url.</div>
                     </div>
                 </md-input-container>
                 <md-input-container>

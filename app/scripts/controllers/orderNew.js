@@ -58,5 +58,10 @@ angular.module('app')
             $state.go('dashboard');
         };
 
+        $scope.addNewService = function(){
+            $scope.order.services.push($scope.newItem);
+            $scope.newItem = {};
+        };
+
         initialise();
     }]);
