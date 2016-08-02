@@ -32,6 +32,26 @@ angular.module('app')
                 {name: 'SEO'},
                 {name: 'Pay Per Click'}
             ];
+            $scope.areas = [
+                {name: 'Aberdeen'},
+                {name: 'Bury'},
+                {name: 'Canterbury'},
+                {name: 'Durham'},
+                {name: 'Esher'},
+                {name: 'Fulham'},
+                {name: 'Great Yarmouth'},
+                {name: 'Harrow'},
+                {name: 'Islington'}
+            ];
+            $scope.headings = [
+                {name: 'Accountants'},
+                {name: 'Builders'},
+                {name: 'Candlestick Makers'},
+                {name: 'Dentists'},
+                {name: 'Fishermen'},
+                {name: 'Plumbers'}
+            ];
+            $scope.newItem = {};
         }
 
         $scope.submitOrderNew = function(){

@@ -4,6 +4,49 @@
             <md-content>
                 <p>{{order.customer.name}}, {{order.customer.postcode}}</p>
             </md-content>
+            <md-content layout-padding>
+                <div>
+                    <form name="newService">
+                        <div layout-gt-xs="row">
+                            <md-input-container>
+                                <md-select ng-model="newItem.service" placeholder="Select a service">
+                                    <md-option ng-value="service.name" ng-repeat="service in services">{{ service.name }}</md-option>
+                                </md-select>
+                            </md-input-container>
+                            <md-input-container>
+                                <md-select ng-model="newItem.area" placeholder="Select an area">
+                                    <md-option ng-value="area.name" ng-repeat="area in areas">{{ area.name }}</md-option>
+                                </md-select>
+                            </md-input-container>
+                            <md-input-container>
+                                <md-select ng-model="newItem.heading" placeholder="Select a heading">
+                                    <md-option ng-value="heading.name" ng-repeat="heading in headings">{{ heading.name }}</md-option>
+                                </md-select>
+                            </md-input-container>
+                        </div>
+                        <div layout-gt-sm="row">
+                            <md-input-container class="md-block" flex-gt-sm>
+                                <label>Postal Code</label>
+                                <input name="postalCode" ng-model="user.postalCode" placeholder="12345"
+                                       required ng-pattern="/^[0-9]{5}$/" md-maxlength="5">
+                                <div ng-messages="userForm.postalCode.$error" role="alert" multiple>
+                                    <div ng-message="required" class="my-message">You must supply a postal code.</div>
+                                    <div ng-message="pattern" class="my-message">That doesn't look like a valid postal
+                                        code.
+                                    </div>
+                                    <div ng-message="md-maxlength" class="my-message">
+                                        Don't use the long version silly...we don't need to be that specific...
+                                    </div>
+                                </div>
+                            </md-input-container>
+                        </div>
+                        <md-input-container class="md-block">
+                            <label>Biography</label>
+                            <textarea ng-model="user.biography" md-maxlength="150" rows="5" md-select-on-focus></textarea>
+                        </md-input-container>
+                    </form>
+                </div>
+            </md-content>
             <md-content>
                 <md-list>
                     <md-list-item ng-repeat="service in order.services" class="md-3-line" ng-click="null">
