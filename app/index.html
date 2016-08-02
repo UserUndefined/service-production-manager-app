@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="en-gb" dir="ltr" class="uk-height-1-1">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>Service Production Manager</title>
+    <style type="text/css"></style>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="msapplication-tap-highlight" content="no">
+    <!-- Favicons-->
+    <link rel="apple-touch-icon-precomposed" href="images/favicon/apple-touch-icon-152x152.png">
+    <meta name="msapplication-TileColor" content="#FFFFFF">
+    <meta name="msapplication-TileImage" content="images/favicon/mstile-144x144.png">
+    <link rel="icon" href="images/favicon/favicon-32x32.png" sizes="32x32">
+    <!--  Android 5 Chrome Color-->
+    <meta name="theme-color" content="#EE6E73">
+    <!-- CSS-->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!-- build:css styles/main.css -->
+    <!-- bower:css -->
+    <link rel="stylesheet" href="bower_components/angular-notify/dist/angular-notify.css" />
+    <link rel="stylesheet" href="bower_components/angular-material/angular-material.css" />
+    <link rel="stylesheet" href="bower_components/lf-ng-md-file-input/dist/lf-ng-md-file-input.css" />
+    <!-- endbower -->
+    <link rel="stylesheet" href="styles/main.css" />
+    <!-- endbuild -->
+</head>
+
+<body ng-cloak>
+<md-toolbar layout="row">
+    <div active-side-nav class="md-toolbar-tools">
+        <md-button ng-click="toggleSidenav('left')" hide-gt-sm class="md-icon-button">
+            <md-icon aria-label="Menu" md-svg-icon="https://s3-us-west-2.amazonaws.com/s.cdpn.io/68133/menu.svg"></md-icon>
+        </md-button>
+        <h1>Service Manager</h1>
+    </div>
+</md-toolbar>
+<div layout="row" flex>
+    <md-sidenav layout="column" class="md-sidenav-left md-whiteframe-z2" md-component-id="left" md-is-locked-open="$mdMedia('gt-sm')">
+        <md-list class="md-2-line">
+            <md-list-item md-ink-ripple><a ng-href="#" class="brand-logo">Logo</a></md-list-item>
+            <md-list-item md-ink-ripple><a ng-href="#">Dashboard</a></md-list-item>
+            <md-list-item md-ink-ripple><a href="#/customer/new">New Customer</a></md-list-item>
+            <md-list-item md-ink-ripple><a href="#/customer/order/new">New Order</a></md-list-item>
+        </md-list>
+    </md-sidenav>
+    <div layout="column" flex id="content">
+        <md-content layout="column" flex class="md-padding">
+            <div layout="column" class="relative" layout-fill role="main">
+                <md-content flex md-scroll-y>
+                    <ui-view layout="column" layout-fill layout-padding></ui-view>
+                </md-content>
+            </div>
+        </md-content>
+    </div>
+</div>
+
+<!--script src="scripts/config.js">
+</script-->
+
+<!-- build:js scripts/main.js -->
+<!-- bower:js -->
+<script src="bower_components/lodash/lodash.js"></script>
+<script src="bower_components/angular/angular.js"></script>
+<script src="bower_components/angular-mocks/angular-mocks.js"></script>
+<script src="bower_components/angular-ui-router/release/angular-ui-router.js"></script>
+<script src="bower_components/restangular/dist/restangular.js"></script>
+<script src="bower_components/spin.js/spin.js"></script>
+<script src="bower_components/angular-spinner/angular-spinner.js"></script>
+<script src="bower_components/angular-notify/dist/angular-notify.js"></script>
+<script src="bower_components/moment/moment.js"></script>
+<script src="bower_components/angular-cookie/angular-cookie.js"></script>
+<script src="bower_components/blob-polyfill/Blob.js"></script>
+<script src="bower_components/file-saver.js/FileSaver.js"></script>
+<script src="bower_components/angular-file-saver/dist/angular-file-saver.bundle.js"></script>
+<script src="bower_components/angular-animate/angular-animate.js"></script>
+<script src="bower_components/angular-aria/angular-aria.js"></script>
+<script src="bower_components/angular-messages/angular-messages.js"></script>
+<script src="bower_components/angular-material/angular-material.js"></script>
+<script src="bower_components/lf-ng-md-file-input/dist/lf-ng-md-file-input.js"></script>
+<!-- endbower -->
+<script src="scripts/main.js"></script>
+<!-- endbuild -->
+</body>
+</html>

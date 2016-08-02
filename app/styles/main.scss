@@ -1,0 +1,26 @@
+//@import "../bower_components/Materialize/sass/materialize.scss";
+@import 'product';
+@import 'validation';
+@import 'receipt';
+
+html {
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+}
+
+header, main, footer {
+  padding-left: 240px;
+}
+
+@media only screen and (max-width : 992px) {
+  header, main, footer {
+    padding-left: 0;
+  }
+}
+
+li:hover {
+  background: #eee;
+}
+
+.collection-item:hover {
+  background: #eee;
+}

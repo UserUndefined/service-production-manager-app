@@ -1,0 +1,5 @@
+{
+    "server": {
+        "apiUrl": "https://generic-receiver-api.herokuapp.com/"
+    }
+}

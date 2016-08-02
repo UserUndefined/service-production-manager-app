@@ -1,0 +1,28 @@
+<md-content layout="row" layout-align="center" >
+    <div layout-fill flex-gt-xs="66">
+        <form name="loginForm">
+            <md-input-container class="md-block">
+                <h3>Service Manager Login</h3>
+            </md-input-container>
+            <md-input-container class="md-block">
+                <label>Organisation</label>
+                <md-icon md-font-set="material-icons">business</md-icon>
+                <input ng-model="user.organisation">
+            </md-input-container>
+            <md-input-container class="md-block">
+                <label>Email Address</label>
+                <md-icon md-font-set="material-icons">email</md-icon>
+                <input ng-model="user.logon" type="email" required minlength="10" maxlength="100" ng-pattern="/^.+@.+\..+$/">
+            </md-input-container>
+            <md-input-container class="md-block">
+                <label>Password</label>
+                <md-icon md-font-set="material-icons">https</md-icon>
+                <input ng-model="user.password" type="password">
+            </md-input-container>
+            <md-input-container class="md-block">
+                <md-checkbox class="md-secondary" ng-model="user.rememberMe">Remember me</md-checkbox>
+            </md-input-container>
+            <md-button class="md-raised md-primary" ng-click="submitLogon()" layout-fill>Login</md-button>
+        </form>
+    </div>
+</md-content>

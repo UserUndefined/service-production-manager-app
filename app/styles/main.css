@@ -1,0 +1,110 @@
+/*
+.product{
+}
+
+.product-section{
+  margin-bottom: 6em;
+}
+
+.collapsible-body p{
+  padding-bottom: 0em;
+  padding-top: 0em;
+}
+*/
+/*
+.css-form input.ng-invalid.ng-touched {
+  background-color: #FA787E;
+}
+
+.css-form input.ng-valid.ng-touched {
+  background-color: #78FA89;
+}
+*/
+/* line 1, ../../app/styles/receipt.scss */
+.list-item-receipt-details {
+  min-height: 100px;
+}
+
+/* line 5, ../../app/styles/receipt.scss */
+.container-item-receipt-thumbnail {
+  float: right;
+}
+
+/* line 12, ../../app/styles/receipt.scss */
+.img-list-receipts-thumbnail {
+  max-width: 100px;
+  max-height: 100px;
+}
+
+/* line 17, ../../app/styles/receipt.scss */
+.receiptPreview {
+  max-width: 100%;
+}
+
+/* line 6, ../../app/styles/main.scss */
+html {
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+}
+
+/* line 10, ../../app/styles/main.scss */
+header, main, footer {
+  padding-left: 240px;
+}
+
+@media only screen and (max-width: 992px) {
+  /* line 15, ../../app/styles/main.scss */
+  header, main, footer {
+    padding-left: 0;
+  }
+}
+/* line 20, ../../app/styles/main.scss */
+li:hover {
+  background: #eee;
+}
+
+/* line 24, ../../app/styles/main.scss */
+.collection-item:hover {
+  background: #eee;
+}
+/*
+.product{
+}
+
+.product-section{
+  margin-bottom: 6em;
+}
+
+.collapsible-body p{
+  padding-bottom: 0em;
+  padding-top: 0em;
+}
+*/
+/* line 1, ../../app/styles/receipt.scss */
+.list-item-receipt-details {
+  min-height: 100px;
+}
+
+/* line 5, ../../app/styles/receipt.scss */
+.container-item-receipt-thumbnail {
+  float: right;
+}
+
+/* line 12, ../../app/styles/receipt.scss */
+.img-list-receipts-thumbnail {
+  max-width: 100px;
+  max-height: 100px;
+}
+
+/* line 17, ../../app/styles/receipt.scss */
+.receiptPreview {
+  max-width: 100%;
+}
+/*
+.css-form input.ng-invalid.ng-touched {
+  background-color: #FA787E;
+}
+
+.css-form input.ng-valid.ng-touched {
+  background-color: #78FA89;
+}
+*/

@@ -1,0 +1,23 @@
+<!--div class="container col s12 m12 l12"-->
+<div class="list-container col s12 m12 l12">
+    <ul class="collection">
+    <li ng-repeat="receipt in filteredReceipts" class="collection-item avatar">
+        <a ng-href="#/receipt/{{receipt._id}}">
+        <div class="list-item-receipt-details">
+                <div class="container-item-receipt-thumbnail">
+                    <img ng-src="{{receipt.file}}" class="img-list-receipts-thumbnail materialboxed">
+                </div>
+                <div class="container-item-receipt-text">
+                    <i class="material-icons circle green">insert_chart</i>
+                    <span class="title">{{receipt.receiptDate | date:'dd MMM yyyy'}}</span>
+                    <p>{{receipt.project}}
+                        <br>
+                    <p ng-if="receipt.price">£{{receipt.price}}</p>
+                    <br>
+                    <p>{{receipt.category}}</p>
+                </div>
+            </div>
+        </a>
+    </li>
+</ul>
+</div>

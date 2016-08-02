@@ -1,0 +1,27 @@
+<md-content layout="row" layout-align="center" >
+    <div layout-fill flex-gt-xs="66">
+        <div layout="column" layout-align="center">
+            <md-datepicker md-open-on-focus ng-model="receipt.receiptDate" md-placeholder="Enter date"></md-datepicker>
+            <md-input-container class="md-block">
+                <label>Claim Value</label>
+                <input type="number" class="validate" required ng-model="receipt.price">
+            </md-input-container>
+            <md-input-container class="md-block">
+                <label>Project</label>
+                <input class="validate" ng-model="receipt.project">
+            </md-input-container>
+            <md-input-container>
+                <md-select ng-model="receipt.category" placeholder="Select a category">
+                    <md-option ng-value="category.name" ng-repeat="category in categories">{{ category.name }}</md-option>
+                </md-select>
+            </md-input-container>
+            <md-input-container>
+                <label>Description</label>
+                <textarea class="validate" type="text" ng-model="receipt.description"></textarea>
+            </md-input-container>
+            <lf-ng-md-file-input lf-files='files' multiple progress preview lf-maxcount="2" lf-filesize="10MB"> </lf-ng-md-file-input>
+            <md-button ng-click="submitReceipt()" ng-if="!receiptInvalid" class="md-raised md-primary">Save Receipt</md-button>
+            <md-button ng-click="submitReceipt()" ng-if="receiptInvalid" ng-disabled="true">Save Receipt</md-button>
+        </div>
+    </div>
+</md-content>
