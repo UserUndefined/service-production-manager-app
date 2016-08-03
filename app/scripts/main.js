@@ -36,7 +36,7 @@
   $templateCache.put("views/newReceipt.html",
     "<md-content layout=row layout-align=center><div layout-fill flex-gt-xs=66><div layout=column layout-align=center><md-datepicker md-open-on-focus ng-model=receipt.receiptDate md-placeholder=\"Enter date\"></md-datepicker><md-input-container class=md-block><label>Claim Value</label><input type=number class=validate required ng-model=receipt.price></md-input-container><md-input-container class=md-block><label>Project</label><input class=validate ng-model=receipt.project></md-input-container><md-input-container><md-select ng-model=receipt.category placeholder=\"Select a category\"><md-option ng-value=category.name ng-repeat=\"category in categories\">{{ category.name }}</md-option></md-select></md-input-container><md-input-container><label>Description</label><textarea class=validate type=text ng-model=receipt.description></textarea></md-input-container><lf-ng-md-file-input lf-files=files multiple progress preview lf-maxcount=2 lf-filesize=10MB></lf-ng-md-file-input><md-button ng-click=submitReceipt() ng-if=!receiptInvalid class=\"md-raised md-primary\">Save Receipt</md-button><md-button ng-click=submitReceipt() ng-if=receiptInvalid ng-disabled=true>Save Receipt</md-button></div></div></md-content>");
   $templateCache.put("views/orderNew.html",
-    "<md-content layout=row layout-align=center><div layout-fill flex-gt-xs=66><div layout=column layout-align=center><md-content><p>{{order.customer.name}}, {{order.customer.postcode}}</p></md-content><md-content layout-padding><div><form name=newServiceForm><div layout-gt-xs=row><md-input-container><md-select ng-model=newItem.name placeholder=\"Select a service\"><md-option ng-value=service.name ng-repeat=\"service in services\">{{ service.name }}</md-option></md-select></md-input-container><md-input-container><md-select ng-model=newItem.area placeholder=\"Select an area\"><md-option ng-value=area.name ng-repeat=\"area in areas\">{{ area.name }}</md-option></md-select></md-input-container><md-input-container><md-select ng-model=newItem.heading placeholder=\"Select a heading\"><md-option ng-value=heading.name ng-repeat=\"heading in headings\">{{ heading.name }}</md-option></md-select></md-input-container><div><ng-md-icon icon=add_circle size=36 ng-click=addNewService()></ng-md-icon></div></div></form></div></md-content><md-content><md-list><md-list-item ng-repeat=\"service in order.services\" class=md-3-line ng-click=null><img ng-src={{item.face}}?{{$index}} class=md-avatar alt=\"{{item.who}}\"><div class=md-list-item-text layout=column><h3>{{ service.name }}</h3><h4>{{ service.heading }}</h4><p>{{ service.area }}</p></div></md-list-item></md-list></md-content><md-input-container class=md-block><label>Address Line 2</label><input class=validate ng-model=customer.address2></md-input-container><md-input-container class=md-block><label>Town</label><input class=validate ng-model=customer.town></md-input-container><md-input-container class=md-block><label>County</label><input class=validate ng-model=customer.county></md-input-container><md-input-container class=md-block><label>Postcode</label><input class=validate required ng-model=customer.postcode></md-input-container><md-input-container class=md-block><label>Telephone</label><input type=tel class=validate required ng-model=customer.telephone></md-input-container><md-input-container class=md-block><label>Email</label><input type=email class=validate ng-model=customer.email></md-input-container><md-input-container class=md-block><label>Url</label><input type=url class=validate required ng-model=customer.url></md-input-container><md-input-container><md-select ng-model=customer.category placeholder=\"Select a category\"><md-option ng-value=category.name ng-repeat=\"category in categories\">{{ category.name }}</md-option></md-select></md-input-container><md-input-container><label>Notes</label><textarea class=validate type=text ng-model=customer.notes></textarea></md-input-container><md-button ng-click=submitCustomerNew() ng-if=!customerInvalid class=\"md-raised md-primary\">Save Customer</md-button><md-button ng-click=submitCustomerNew() ng-if=customerInvalid ng-disabled=true>Save Customer</md-button></div></div></md-content>");
+    "<md-content layout=column layout-align=center><div><p>{{order.customer.name}}, {{order.customer.postcode}}</p></div><md-divider></md-divider><form name=newServiceForm><div layout-gt-xs=row><div flex=30><md-input-container><md-select ng-model=newItem.name placeholder=\"Select a service\"><md-option ng-value=service.name ng-repeat=\"service in services\">{{ service.name }}</md-option></md-select></md-input-container></div><div flex=30><md-input-container><md-select ng-model=newItem.area placeholder=\"Select an area\"><md-option ng-value=area.name ng-repeat=\"area in areas\">{{ area.name }}</md-option></md-select></md-input-container></div><div flex=30><md-input-container><md-select ng-model=newItem.heading placeholder=\"Select a heading\"><md-option ng-value=heading.name ng-repeat=\"heading in headings\">{{ heading.name }}</md-option></md-select></md-input-container></div><div flex=10><md-input-container><div><ng-md-icon icon=add_circle size=36 ng-click=addNewService()></ng-md-icon></div></md-input-container></div></div></form><md-divider></md-divider><div layout=column layout-fill><md-list><md-list-item class=\"md-3-line noright\" ng-repeat=\"phone in order.services\"><md-icon md-svg-icon={{phone.options.icon}} ng-if=phone.options.icon ng-class=\"{'md-avatar-icon': phone.options.avatarIcon}\"></md-icon><img ng-src={{phone.options.face}}?25 class=md-avatar alt={{phone.options.face}} ng-if=\"phone.options.face\"><div class=md-list-item-text ng-class=\"{'md-offset': phone.options.offset }\"><h3>{{ phone.name }}</h3><p>{{ phone.heading }}</p><p>{{ phone.area }}</p></div><ng-md-icon class=md-secondary icon=clear size=36 ng-click=removeService()></ng-md-icon></md-list-item></md-list><md-button ng-click=submitOrderNew() ng-if=!orderInvalid class=\"md-raised md-primary\">Save Order</md-button><md-button ng-click=submitOrderNew() ng-if=orderInvalid ng-disabled=true>Save Order</md-button></div></md-content>");
 }]);
 ;angular.module('app', ['appTemplates', 'ui.router', 'config', 'restangular', 'angularSpinner', 'cgNotify', 'ipCookie', 'ngFileSaver','ngMaterial', 'lfNgMdFileInput', 'ngMessages', 'ngMdIcons'])
 
@@ -48,8 +48,12 @@
         });
     }])
 
-    .config(['$stateProvider', '$urlRouterProvider', '$mdThemingProvider',
-        function ($stateProvider, $urlRouterProvider, $mdThemingProvider) {
+    .config(['$stateProvider', '$urlRouterProvider', '$mdThemingProvider', '$mdIconProvider',
+        function ($stateProvider, $urlRouterProvider, $mdThemingProvider, $mdIconProvider) {
+
+            $mdIconProvider
+                .iconSet('mdi', 'images/mdi.svg')
+                .iconSet('content', 'images/content.svg');
 
             var dashboardView = {
                     url: '/',
@@ -730,24 +734,42 @@ angular.module('app')
                     {
                         name: 'Website',
                         area: 'Aberdeen',
-                        heading: 'Builders'
+                        heading: 'Builders',
+                        options: {
+                            offset: true,
+                            actionIcon: 'mdi:access-point',
+                            icon: 'mdi:earth',
+                            avatarIcon: true
+                        }
                     },
                     {
                         name: 'SEO',
                         area: 'Aberdeen',
-                        heading: 'Builders'
+                        heading: 'Builders',
+                        options: {
+                            offset: true,
+                            actionIcon: 'content:clear',
+                            face : '/images/browser.svg',
+                            avatarIcon: true
+                        }
                     },
                     {
                         name: 'Pay Per Click',
                         area: 'Aberdeen',
-                        heading: 'Builders'
+                        heading: 'Builders',
+                        options: {
+                            offset: true,
+                            actionIcon: 'content:add_circle',
+                            face : '/images/browser.svg',
+                            avatarIcon: true
+                        }
                     }
                 ]
             };
             $scope.services = [
-                {name: 'Website'},
-                {name: 'SEO'},
-                {name: 'Pay Per Click'}
+                {name: 'Website', icon: 'communication:phone'},
+                {name: 'SEO', icon: 'communication:phone'},
+                {name: 'Pay Per Click', icon: 'communication:phone'}
             ];
             $scope.areas = [
                 {name: 'Aberdeen'},

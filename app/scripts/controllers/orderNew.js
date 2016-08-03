@@ -13,24 +13,42 @@ angular.module('app')
                     {
                         name: 'Website',
                         area: 'Aberdeen',
-                        heading: 'Builders'
+                        heading: 'Builders',
+                        options: {
+                            offset: true,
+                            actionIcon: 'mdi:access-point',
+                            icon: 'mdi:earth',
+                            avatarIcon: true
+                        }
                     },
                     {
                         name: 'SEO',
                         area: 'Aberdeen',
-                        heading: 'Builders'
+                        heading: 'Builders',
+                        options: {
+                            offset: true,
+                            actionIcon: 'content:clear',
+                            face : '/images/browser.svg',
+                            avatarIcon: true
+                        }
                     },
                     {
                         name: 'Pay Per Click',
                         area: 'Aberdeen',
-                        heading: 'Builders'
+                        heading: 'Builders',
+                        options: {
+                            offset: true,
+                            actionIcon: 'content:add_circle',
+                            face : '/images/browser.svg',
+                            avatarIcon: true
+                        }
                     }
                 ]
             };
             $scope.services = [
-                {name: 'Website'},
-                {name: 'SEO'},
-                {name: 'Pay Per Click'}
+                {name: 'Website', icon: 'communication:phone'},
+                {name: 'SEO', icon: 'communication:phone'},
+                {name: 'Pay Per Click', icon: 'communication:phone'}
             ];
             $scope.areas = [
                 {name: 'Aberdeen'},

@@ -8,8 +8,12 @@ angular.module('app', ['appTemplates', 'ui.router', 'config', 'restangular', 'an
         });
     }])
 
-    .config(['$stateProvider', '$urlRouterProvider', '$mdThemingProvider',
-        function ($stateProvider, $urlRouterProvider, $mdThemingProvider) {
+    .config(['$stateProvider', '$urlRouterProvider', '$mdThemingProvider', '$mdIconProvider',
+        function ($stateProvider, $urlRouterProvider, $mdThemingProvider, $mdIconProvider) {
+
+            $mdIconProvider
+                .iconSet('mdi', 'images/mdi.svg')
+                .iconSet('content', 'images/content.svg');
 
             var dashboardView = {
                     url: '/',
