@@ -73,108 +73,6 @@ angular.module('app', ['appTemplates', 'ui.router', 'config', 'restangular', 'an
                             return defer.promise;
                         }]
                     }
-                },
-                mainView = {
-                    url: '/main',
-                    templateUrl: 'views/main.html',
-                    controller: 'MainController'
-                    },
-                captureReceiptView = {
-                    url: '/capture',
-                    templateUrl: 'views/captureReceipt.html',
-                    controller: 'CaptureReceiptController'
-                },
-                newReceiptView = {
-                    url: '/new',
-                    templateUrl: 'views/newReceipt.html',
-                    controller: 'NewReceiptController',
-                    resolve: {
-                        authentication: ['userService', '$q', function (userService, $q) {
-                            var defer = $q.defer();
-                            userService.isLoggedIn().then(function (loggedIn) {
-                                if (loggedIn) {
-                                    defer.resolve(true);
-                                } else {
-                                    defer.reject();
-                                }
-                            });
-                            return defer.promise;
-                        }]
-                    }
-                },
-                editReceiptsView = {
-                    url: '/list',
-                    templateUrl: 'views/editReceipts.html',
-                    controller: 'EditReceiptsController',
-                    resolve: {
-                        authentication: ['userService', '$q', function (userService, $q) {
-                            var defer = $q.defer();
-                            userService.isLoggedIn().then(function (loggedIn) {
-                                if (loggedIn) {
-                                    defer.resolve(true);
-                                } else {
-                                    defer.reject();
-                                }
-                            });
-                            return defer.promise;
-                        }]
-                    }
-                },
-                editReceiptView = {
-                    url: '/receipt/:receiptId',
-                    templateUrl: 'views/editReceipt.html',
-                    controller: 'EditReceiptController',
-                    resolve: {
-                        authentication: ['userService', '$q', function (userService, $q) {
-                            var defer = $q.defer();
-                            userService.isLoggedIn().then(function (loggedIn) {
-                                if (loggedIn) {
-                                    defer.resolve(true);
-                                } else {
-                                    defer.reject();
-                                }
-                            });
-                            return defer.promise;
-                        }]
-                    }
-                },
-                exportView = {
-                    url: '/export',
-                    templateUrl: 'views/export.html',
-                    controller: 'ExportController',
-                    resolve: {
-                        authentication: ['userService', '$q', function (userService, $q) {
-                            var defer = $q.defer();
-                            userService.isLoggedIn().then(function (loggedIn) {
-                                if (loggedIn) {
-                                    defer.resolve(true);
-                                } else {
-                                    defer.reject();
-                                }
-                            });
-                            return defer.promise;
-                        }]
-                    }
-                },
-                newNotesView = {
-                    url: '/new',
-                    templateUrl: 'views/newNotes.html',
-                    controller: 'NewNotesController'
-                },
-                editNotesView = {
-                    url: '/new',
-                    templateUrl: 'views/editNotes.html',
-                    controller: 'EditNotesController'
-                },
-                directivesExamplesView = {
-                    url: '/directives',
-                    templateUrl: 'views/directiveExamples.html',
-                    controller: 'directiveExamplesController'
-                },
-                formValidationExampleView = {
-                    url: '/forms',
-                    templateUrl: 'views/formValidation.html',
-                    controller: 'formValidationExampleController'
                 };
 
             $stateProvider
@@ -183,16 +81,7 @@ angular.module('app', ['appTemplates', 'ui.router', 'config', 'restangular', 'an
                 .state('login', loginView)
                 .state('customerNew', customerNewView)
                 .state('orderNew', orderNewView)
-            .state('main', mainView)
-            .state('captureReceipt', captureReceiptView)
-            .state('newReceipt', newReceiptView)
-            .state('export', exportView)
-            .state('newNotes', newNotesView)
-            .state('editNotes', editNotesView)
-            .state('editReceipt', editReceiptView)
-            .state('editReceipts', editReceiptsView)
-            .state('directivesExamples', directivesExamplesView)
-            .state('formValidationExample', formValidationExampleView);
+            ;
 
             $urlRouterProvider.otherwise('/');
 
