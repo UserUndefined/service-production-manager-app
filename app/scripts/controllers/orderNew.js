@@ -3,52 +3,23 @@
 angular.module('app')
     .controller('OrderNewController', ['$scope', '$state', 'userService', 'notify', function ($scope, $state, userService, notify) {
 
+        var orderItemIndex = 0;
+
         function initialise(){
             $scope.order = {
                 customer: {
                     name: 'Test Customer',
                     postcode: 'TE5 T01'
                 },
-                services: [
-                    {
-                        name: 'Website',
-                        area: 'Aberdeen',
-                        heading: 'Builders',
-                        options: {
-                            offset: true,
-                            actionIcon: 'mdi:access-point',
-                            icon: 'mdi:earth',
-                            avatarIcon: true
-                        }
-                    },
-                    {
-                        name: 'SEO',
-                        area: 'Aberdeen',
-                        heading: 'Builders',
-                        options: {
-                            offset: true,
-                            actionIcon: 'content:clear',
-                            face : '/images/browser.svg',
-                            avatarIcon: true
-                        }
-                    },
-                    {
-                        name: 'Pay Per Click',
-                        area: 'Aberdeen',
-                        heading: 'Builders',
-                        options: {
-                            offset: true,
-                            actionIcon: 'content:add_circle',
-                            face : '/images/browser.svg',
-                            avatarIcon: true
-                        }
-                    }
-                ]
+                //services: [{area:'test', heading:'test2', product: {name: 'Website', price: 250, options: {icon: 'web'}}}],
+                services: [],
+                totalValue: 0
             };
-            $scope.services = [
-                {name: 'Website', icon: 'communication:phone'},
-                {name: 'SEO', icon: 'communication:phone'},
-                {name: 'Pay Per Click', icon: 'communication:phone'}
+            $scope.newItem = {itemIndex: orderItemIndex};
+            $scope.serviceProducts = [
+                {product: {name: 'Website', price: 250, options: {icon: 'web'}}},
+                {product: {name: 'SEO', price: 200, options: {icon: 'find_in_page'}}},
+                {product: {name: 'Pay Per Click', price: 150, options: {icon: 'mouse'}}}
             ];
             $scope.areas = [
                 {name: 'Aberdeen'},
@@ -69,7 +40,6 @@ angular.module('app')
                 {name: 'Fishermen'},
                 {name: 'Plumbers'}
             ];
-            $scope.newItem = {};
         }
 
         $scope.submitOrderNew = function(){
@@ -78,8 +48,22 @@ angular.module('app')
 
         $scope.addNewService = function(){
             $scope.order.services.push($scope.newItem);
-            $scope.newItem = {};
+            orderItemIndex++;
+            calculateOrderValue();
+            $scope.newItem = {itemIndex: orderItemIndex};
         };
+
+        $scope.removeService = function(item){
+            var index = $scope.order.services.indexOf(item);
+            $scope.order.services.splice(index,1);
+            orderItemIndex++;
+            calculateOrderValue();
+            $scope.newItem = {itemIndex: orderItemIndex};
+        };
+
+        function calculateOrderValue() {
+            $scope.order.totalValue = _.sumBy($scope.order.services, function(service) { return service.product.price; });
+        }
 
         initialise();
     }]);
