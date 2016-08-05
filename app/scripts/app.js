@@ -1,4 +1,4 @@
-angular.module('app', ['appTemplates', 'ui.router', 'config', 'restangular', 'angularSpinner', 'cgNotify', 'ipCookie', 'ngFileSaver','ngMaterial', 'lfNgMdFileInput', 'ngMessages', 'ngMdIcons'])
+angular.module('app', ['appTemplates', 'ui.router', 'config', 'restangular', 'angularSpinner', 'cgNotify', 'ipCookie', 'ngFileSaver','ngMaterial', 'lfNgMdFileInput', 'ngMessages', 'ngMdIcons','ngAnimate'])
 
     .run(['$rootScope', '$state', '$stateParams', function ($rootScope, $state, $stateParams) {
         $rootScope.$state = $state;
@@ -110,8 +110,17 @@ angular.module('app', ['appTemplates', 'ui.router', 'config', 'restangular', 'an
 
         }]);
 
+
 angular.element(document).ready(function () {
-    angular.bootstrap(document, ['app']);
+
+    setTimeout(
+        function asyncBootstrap() {
+            angular.bootstrap( document, [ "app" ] );
+        },
+        ( 3 * 1000 )
+    );
+
+    //angular.bootstrap(document, ['app']);
     //$('.button-collapse').sideNav();
     //$('select').material_select();
     //$(".dropdown-button").dropdown();

@@ -18,7 +18,7 @@
   $templateCache.put("views/orderNew.html",
     "<md-content layout=column layout-align=center><div><p>{{order.customer.name}}, {{order.customer.postcode}}</p></div><md-divider></md-divider><form name=newServiceForm><div layout-gt-xs=row><div flex=30><md-input-container><md-select ng-model=newItem.product placeholder=\"Select a product\"><md-option ng-value=serviceProduct.product ng-repeat=\"serviceProduct in serviceProducts\">{{ serviceProduct.product.name }}</md-option></md-select></md-input-container></div><div flex=30><md-input-container><md-select ng-model=newItem.area placeholder=\"Select an area\"><md-option ng-value=area.name ng-repeat=\"area in areas\">{{ area.name }}</md-option></md-select></md-input-container></div><div flex=30><md-input-container><md-select ng-model=newItem.heading placeholder=\"Select a heading\"><md-option ng-value=heading.name ng-repeat=\"heading in headings\">{{ heading.name }}</md-option></md-select></md-input-container></div><div flex=10><md-input-container><div><ng-md-icon icon=add_circle size=36 ng-click=addNewService()></ng-md-icon></div></md-input-container></div></div></form><md-divider ng-if=\"order.totalValue > 0\"></md-divider><div layout=column layout-fill><md-list><md-list-item class=\"md-3-line noright\" ng-repeat=\"service in order.services\"><ng-md-icon icon={{service.product.options.icon}} size=36 ng-click=removeService(service)></ng-md-icon><div class=md-list-item-text ng-class=\"{'md-offset': service.options.offset }\"><h3>{{ service.product.name }}</h3><p>{{ service.heading }}</p><p>{{ service.area }}</p></div><div class=md-secondary><p>£{{service.product.price}}</p><ng-md-icon icon=clear size=36 ng-click=removeService(service) style=fill:pink></ng-md-icon></div></md-list-item></md-list><md-divider></md-divider><div layout=row layout-align=end><div flex=50></div><div flex=25><p>Total:</p></div><div flex=nogrow><p>£{{order.totalValue}}</p></div></div><md-divider></md-divider><md-button ng-disabled=\"order.totalValue == 0\" class=\"md-raised md-primary\">Save Order</md-button></div></md-content>");
 }]);
-;angular.module('app', ['appTemplates', 'ui.router', 'config', 'restangular', 'angularSpinner', 'cgNotify', 'ipCookie', 'ngFileSaver','ngMaterial', 'lfNgMdFileInput', 'ngMessages', 'ngMdIcons'])
+;angular.module('app', ['appTemplates', 'ui.router', 'config', 'restangular', 'angularSpinner', 'cgNotify', 'ipCookie', 'ngFileSaver','ngMaterial', 'lfNgMdFileInput', 'ngMessages', 'ngMdIcons','ngAnimate'])
 
     .run(['$rootScope', '$state', '$stateParams', function ($rootScope, $state, $stateParams) {
         $rootScope.$state = $state;
@@ -130,8 +130,17 @@
 
         }]);
 
+
 angular.element(document).ready(function () {
-    angular.bootstrap(document, ['app']);
+
+    setTimeout(
+        function asyncBootstrap() {
+            angular.bootstrap( document, [ "app" ] );
+        },
+        ( 3 * 1000 )
+    );
+
+    //angular.bootstrap(document, ['app']);
     //$('.button-collapse').sideNav();
     //$('select').material_select();
     //$(".dropdown-button").dropdown();
@@ -644,6 +653,34 @@ angular.module('app')
             }
         };
     }]);
+;'use strict';
+
+angular.module('app')
+    .directive('mAppLoading', ['$animate', function($animate) {
+        // Return the directive configuration.
+        return({
+            link: link,
+            restrict: "C"
+            });
+        // I bind the JavaScript events to the scope.
+        function link( scope, element, attributes ) {
+            // Due to the way AngularJS prevents animation during the bootstrap
+            // of the application, we can't animate the top-level container; but,
+            // since we added "ngAnimateChildren", we can animated the inner
+            // container during this phase.
+            // --
+            // NOTE: Am using .eq(1) so that we don't animate the Style block.
+            $animate.leave( element.children().eq( 1 ) ).then(
+                function cleanupAfterAnimation() {
+                    // Remove the root directive element.
+                    element.remove();
+                    // Clear the closed-over variable references.
+                    scope = element = attributes = null;
+                }
+            );
+        }
+    }]);
+
 ;'use strict';
 
 angular.module('app')
