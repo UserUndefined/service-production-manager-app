@@ -5,7 +5,7 @@ angular.module('app')
 
         function initialise(){
             if (userService.isLoggedIn()){
-                $state.transitionTo('newReceipt');
+                $state.transitionTo('dashboard');
             }
 
             $scope.user = {

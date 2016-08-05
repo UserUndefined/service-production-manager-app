@@ -1,0 +1,14 @@
+<md-content layout="row" layout-align="center" >
+    <div layout-fill flex-gt-xs="66">
+        <div layout-align="center">
+            <form name="customerSearchForm" layout="column">
+                <md-input-container class="md-block">
+                    <label>Search</label>
+                    <input name="customerSearch" type="text" class="validate" ng-model="customer.searchText">
+                </md-input-container>
+                <md-button ng-click="searchCustomers()" ng-disabled="customer.searchText == ''" class="md-raised md-primary">Search</md-button>
+            </form>
+        </div>
+    </div>
+</md-content>
+

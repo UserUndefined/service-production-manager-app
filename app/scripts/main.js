@@ -7,6 +7,8 @@
   "use strict";
   $templateCache.put("views/customerNew.html",
     "<md-content layout=row layout-align=center><div layout-fill flex-gt-xs=66><div layout-align=center><form name=customerNewForm layout=column><md-input-container class=md-block><label>Name</label><input name=customerName class=validate required ng-model=customer.name><div ng-messages=customerNewForm.customerName.$error><div ng-message=required>You must supply a company name.</div></div></md-input-container><md-input-container class=md-block><label>Address Line 1</label><input name=customerAddress1 class=validate required ng-model=customer.address1><div ng-messages=customerNewForm.customerAddress1.$error><div ng-message=required>You must supply a first line address.</div></div></md-input-container><md-input-container class=md-block><label>Address Line 2</label><input class=validate ng-model=customer.address2></md-input-container><md-input-container class=md-block><label>Town</label><input class=validate ng-model=customer.town></md-input-container><md-input-container class=md-block><label>County</label><input class=validate ng-model=customer.county></md-input-container><md-input-container class=md-block><label>Postcode</label><input name=customerPostcode class=validate required ng-model=customer.postcode><div ng-messages=customerNewForm.customerPostcode.$error><div ng-message=required>You must supply a postcode.</div><div ng-message=pattern>Invalid postcode.</div></div></md-input-container><md-input-container class=md-block><label>Telephone</label><input name=customerTelephone type=tel class=validate required ng-model=customer.telephone><div ng-messages=customerNewForm.customerTelephone.$error><div ng-message=required>You must supply a telephone number.</div><div ng-message=pattern>Invalid telephone number.</div></div></md-input-container><md-input-container class=md-block><label>Email</label><input name=customerEmail type=email class=validate ng-model=customer.email ng-pattern=\"/^.+@.+\\..+$/\"><div ng-messages=customerNewForm.customerEmail.$error><div ng-message=pattern>Invalid email address.</div></div></md-input-container><md-input-container class=md-block><label>Url</label><input name=customerUrl type=url class=validate ng-model=customer.url><div ng-messages=customerNewForm.customerUrl.$error><div ng-message=url>Invalid url.</div></div></md-input-container><md-input-container><md-select ng-model=customer.category placeholder=\"Select a category\"><md-option ng-value=category.name ng-repeat=\"category in categories\">{{ category.name }}</md-option></md-select></md-input-container><md-input-container><label>Notes</label><textarea class=validate type=text ng-model=customer.notes></textarea></md-input-container><md-button ng-click=submitCustomerNew() ng-if=!customerInvalid class=\"md-raised md-primary\">Save Customer</md-button><md-button ng-click=submitCustomerNew() ng-if=customerInvalid ng-disabled=true>Save Customer</md-button></form></div></div></md-content>");
+  $templateCache.put("views/customerSearch.html",
+    "<md-content layout=row layout-align=center><div layout-fill flex-gt-xs=66><div layout-align=center><form name=customerSearchForm layout=column><md-input-container class=md-block><label>Search</label><input name=customerSearch class=validate ng-model=customer.searchText></md-input-container><md-button ng-click=searchCustomers() ng-disabled=\"customer.searchText == ''\" class=\"md-raised md-primary\">Search</md-button></form></div></div></md-content>");
   $templateCache.put("views/dashboard.html",
     "<md-content class=md-padding layout-xs=column layout=row><md-card><img ng-src=images/mouseandpaperwork.jpg class=md-card-image alt=\"Office Desktop\"><md-card-content><p>{{stats.receiptsLastSevenDays}} receipts entered in the last 7 days</p></md-card-content><md-card-actions layout=row layout-align=\"start center\"><md-button ng-click=navigateToList()>View All Receipts</md-button></md-card-actions></md-card><md-card><img ng-src=images/calculatorandpen.jpg class=md-card-image alt=\"Office Desktop Calculator\"><md-card-content><p>{{stats.receiptsLastMonth}} receipts entered in the last month</p></md-card-content><md-card-actions layout=row layout-align=\"start center\"><md-button ng-click=navigateToList()>View All Receipts</md-button></md-card-actions></md-card></md-content>");
   $templateCache.put("views/directives/currentUser.html",
@@ -91,6 +93,24 @@
                             return defer.promise;
                         }]
                     }
+                },
+                customerSearchView = {
+                    url: '/customer/search',
+                    templateUrl: 'views/customerSearch.html',
+                    controller: 'CustomerSearchController',
+                    resolve: {
+                        authentication: ['userService', '$q', function (userService, $q) {
+                            var defer = $q.defer();
+                            userService.isLoggedIn().then(function (loggedIn) {
+                                if (loggedIn) {
+                                    defer.resolve(true);
+                                } else {
+                                    defer.reject();
+                                }
+                            });
+                            return defer.promise;
+                        }]
+                    }
                 };
 
             $stateProvider
@@ -99,6 +119,7 @@
                 .state('login', loginView)
                 .state('customerNew', customerNewView)
                 .state('orderNew', orderNewView)
+                .state('customerSearch', customerSearchView)
             ;
 
             $urlRouterProvider.otherwise('/');
@@ -156,6 +177,21 @@ angular.module('app')
 ;'use strict';
 
 angular.module('app')
+    .controller('CustomerSearchController', ['$scope', '$state', 'userService', 'notify', function ($scope, $state, userService, notify) {
+
+        function initialise(){
+            $scope.customer = {searchText: '', results: []};
+        }
+
+        $scope.searchCustomers = function(){
+            $scope.customer.results = [{name: 'Test Customer'}];
+        };
+
+        initialise();
+    }]);
+;'use strict';
+
+angular.module('app')
     .controller('DashboardController', ['$scope', '$state', 'ReceiptApi', 'notify', function ($scope, $state, ReceiptApi, notify) {
 
         function initialise(){
@@ -179,7 +215,7 @@ angular.module('app')
 
         function initialise(){
             if (userService.isLoggedIn()){
-                $state.transitionTo('newReceipt');
+                $state.transitionTo('dashboard');
             }
 
             $scope.user = {

@@ -73,6 +73,24 @@ angular.module('app', ['appTemplates', 'ui.router', 'config', 'restangular', 'an
                             return defer.promise;
                         }]
                     }
+                },
+                customerSearchView = {
+                    url: '/customer/search',
+                    templateUrl: 'views/customerSearch.html',
+                    controller: 'CustomerSearchController',
+                    resolve: {
+                        authentication: ['userService', '$q', function (userService, $q) {
+                            var defer = $q.defer();
+                            userService.isLoggedIn().then(function (loggedIn) {
+                                if (loggedIn) {
+                                    defer.resolve(true);
+                                } else {
+                                    defer.reject();
+                                }
+                            });
+                            return defer.promise;
+                        }]
+                    }
                 };
 
             $stateProvider
@@ -81,6 +99,7 @@ angular.module('app', ['appTemplates', 'ui.router', 'config', 'restangular', 'an
                 .state('login', loginView)
                 .state('customerNew', customerNewView)
                 .state('orderNew', orderNewView)
+                .state('customerSearch', customerSearchView)
             ;
 
             $urlRouterProvider.otherwise('/');
