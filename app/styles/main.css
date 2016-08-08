@@ -48,35 +48,50 @@
 
 /* line 10, ../../app/styles/main.scss */
 [ng-cloak].splash {
-  background-color: #428bca;
-  width: 100%;
-  text-align: center;
-  color: white;
   display: block !important;
 }
 
-/* line 18, ../../app/styles/main.scss */
+/* line 14, ../../app/styles/main.scss */
+.splash {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  filter: alpha(opacity=60);
+  opacity: 0.6;
+  background: #428bca;
+}
+
+/* line 25, ../../app/styles/main.scss */
+.splash h2 {
+  text-align: center;
+  font-size: 3em;
+  color: white;
+}
+
+/* line 31, ../../app/styles/main.scss */
 html {
   font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
 }
 
-/* line 22, ../../app/styles/main.scss */
+/* line 35, ../../app/styles/main.scss */
 header, main, footer {
   padding-left: 240px;
 }
 
 @media only screen and (max-width: 992px) {
-  /* line 27, ../../app/styles/main.scss */
+  /* line 40, ../../app/styles/main.scss */
   header, main, footer {
     padding-left: 0;
   }
 }
-/* line 32, ../../app/styles/main.scss */
+/* line 45, ../../app/styles/main.scss */
 li:hover {
   background: #eee;
 }
 
-/* line 36, ../../app/styles/main.scss */
+/* line 49, ../../app/styles/main.scss */
 .collection-item:hover {
   background: #eee;
 }
