@@ -1,0 +1,35 @@
+.side-nav-link .md-button {
+  color: rgba(255, 255, 255, 0.56);
+  text-decoration: none;
+  margin: 0;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 24px;
+  letter-spacing: 0;
+  opacity: .87;
+  display: block;
+  -webkit-flex-shrink: 0;
+  -ms-flex-negative: 0;
+  flex-shrink: 0;
+  padding: 16px;
+  margin: 0;
+  width: 100%;
+}
+
+.side-nav-link  .md-button:hover {
+  background-color: #00BCD4;
+  color: #37474F;
+}
+
+.side-nav-link-header md-toolbar {
+  background-color: #263238 !important;
+}
+
+.side-nav-link-base {
+  background-color: #37474f !important;
+  max-width: 240px;
+}
+
+.side-nav-link-avatar {
+  border-radius: 99%;
+}

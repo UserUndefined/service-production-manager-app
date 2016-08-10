@@ -133,28 +133,16 @@
 
 angular.element(document).ready(function () {
 
-    setTimeout(
+/**
+     //used for displaying a splash screen
+     setTimeout(
         function asyncBootstrap() {
             angular.bootstrap( document, [ "app" ] );
         },
-        ( 3 * 1000 )
+        ( 1 * 1000 )
     );
-
-    //angular.bootstrap(document, ['app']);
-    //$('.button-collapse').sideNav();
-    //$('select').material_select();
-    //$(".dropdown-button").dropdown();
-    //$('.materialboxed').materialbox();
-    //$('.button-collapse').sideNav({
-    //    menuWidth: 240, // Default is 240
-    //    edge: 'left', // Choose the horizontal origin
-    //    closeOnClick: false // Closes side-nav on <a> clicks, useful for Angular/Meteor
-    //});
-    //$('.datepicker').pickadate({
-    //    selectMonths: true, // Creates a dropdown to control month
-    //    selectYears: 15, // Creates a dropdown of 15 years to control year
-    //    format: 'dd mmm yyyy'
-    //});
+*/
+    angular.bootstrap(document, ['app']);
 });
 ;'use strict';
 
@@ -336,10 +324,35 @@ angular.module('app')
         return {
             scope: false,
             restrict: 'A',
-            controller: ['$scope', '$mdSidenav', function($scope, $mdSidenav){
+            controller: ['$scope', '$mdSidenav', '$state', function($scope, $mdSidenav, $state){
                 $scope.toggleSidenav = function(menuId){
                     $mdSidenav(menuId).toggle();
                 };
+                $scope.menu = [
+                    {
+                        link : 'dashboard',
+                        title: 'Dashboard',
+                        icon: 'dashboard'
+                    },
+                    {
+                        link : 'customerNew',
+                        title: 'New Customer',
+                        icon: 'group'
+                    },
+                    {
+                        link : 'orderNew',
+                        title: 'New Order',
+                        icon: 'group'
+                    },
+                    {
+                        link : 'customerSearch',
+                        title: 'Customer Search',
+                        icon: 'message'
+                    }
+                ];
+                $scope.openPage = function(menuItem){
+                    $state.go(menuItem.link);
+                }
             }]
         };
     });

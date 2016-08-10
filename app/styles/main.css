@@ -41,17 +41,17 @@
   max-width: 100%;
 }
 
-/* line 6, ../../app/styles/main.scss */
+/* line 1, ../../app/styles/splash.scss */
 .splash {
   display: none;
 }
 
-/* line 10, ../../app/styles/main.scss */
+/* line 5, ../../app/styles/splash.scss */
 [ng-cloak].splash {
   display: block !important;
 }
 
-/* line 14, ../../app/styles/main.scss */
+/* line 9, ../../app/styles/splash.scss */
 .splash {
   position: absolute;
   top: 0;
@@ -63,35 +63,75 @@
   background: #428bca;
 }
 
-/* line 25, ../../app/styles/main.scss */
+/* line 20, ../../app/styles/splash.scss */
 .splash h2 {
   text-align: center;
   font-size: 3em;
   color: white;
 }
 
-/* line 31, ../../app/styles/main.scss */
+/* line 1, ../../app/styles/sidebar.scss */
+.side-nav-link .md-button {
+  color: rgba(255, 255, 255, 0.56);
+  text-decoration: none;
+  margin: 0;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 24px;
+  letter-spacing: 0;
+  opacity: .87;
+  display: block;
+  -ms-flex-negative: 0;
+  flex-shrink: 0;
+  padding: 16px;
+  margin: 0;
+  width: 100%;
+}
+
+/* line 19, ../../app/styles/sidebar.scss */
+.side-nav-link .md-button:hover {
+  background-color: #00BCD4;
+  color: #37474F;
+}
+
+/* line 24, ../../app/styles/sidebar.scss */
+.side-nav-link-header md-toolbar {
+  background-color: #263238 !important;
+}
+
+/* line 28, ../../app/styles/sidebar.scss */
+.side-nav-link-base {
+  background-color: #37474f !important;
+  max-width: 240px;
+}
+
+/* line 33, ../../app/styles/sidebar.scss */
+.side-nav-link-avatar {
+  border-radius: 99%;
+}
+
+/* line 7, ../../app/styles/main.scss */
 html {
   font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
 }
 
-/* line 35, ../../app/styles/main.scss */
+/* line 11, ../../app/styles/main.scss */
 header, main, footer {
   padding-left: 240px;
 }
 
 @media only screen and (max-width: 992px) {
-  /* line 40, ../../app/styles/main.scss */
+  /* line 16, ../../app/styles/main.scss */
   header, main, footer {
     padding-left: 0;
   }
 }
-/* line 45, ../../app/styles/main.scss */
+/* line 21, ../../app/styles/main.scss */
 li:hover {
   background: #eee;
 }
 
-/* line 49, ../../app/styles/main.scss */
+/* line 25, ../../app/styles/main.scss */
 .collection-item:hover {
   background: #eee;
 }
@@ -127,6 +167,73 @@ li:hover {
 /* line 17, ../../app/styles/receipt.scss */
 .receiptPreview {
   max-width: 100%;
+}
+/* line 1, ../../app/styles/sidebar.scss */
+.side-nav-link .md-button {
+  color: rgba(255, 255, 255, 0.56);
+  text-decoration: none;
+  margin: 0;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 24px;
+  letter-spacing: 0;
+  opacity: .87;
+  display: block;
+  -ms-flex-negative: 0;
+  flex-shrink: 0;
+  padding: 16px;
+  margin: 0;
+  width: 100%;
+}
+
+/* line 19, ../../app/styles/sidebar.scss */
+.side-nav-link .md-button:hover {
+  background-color: #00BCD4;
+  color: #37474F;
+}
+
+/* line 24, ../../app/styles/sidebar.scss */
+.side-nav-link-header md-toolbar {
+  background-color: #263238 !important;
+}
+
+/* line 28, ../../app/styles/sidebar.scss */
+.side-nav-link-base {
+  background-color: #37474f !important;
+  max-width: 240px;
+}
+
+/* line 33, ../../app/styles/sidebar.scss */
+.side-nav-link-avatar {
+  border-radius: 99%;
+}
+/* line 1, ../../app/styles/splash.scss */
+.splash {
+  display: none;
+}
+
+/* line 5, ../../app/styles/splash.scss */
+[ng-cloak].splash {
+  display: block !important;
+}
+
+/* line 9, ../../app/styles/splash.scss */
+.splash {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  filter: alpha(opacity=60);
+  opacity: 0.6;
+  background: #428bca;
+}
+
+/* line 20, ../../app/styles/splash.scss */
+.splash h2 {
+  text-align: center;
+  font-size: 3em;
+  color: white;
 }
 /*
 .css-form input.ng-invalid.ng-touched {
