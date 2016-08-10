@@ -16,7 +16,8 @@
     "angular-animate": "^1.5.8",
     "angular-aria": "^1.5.8",
     "lf-ng-md-file-input": "^1.4.8",
-    "angular-material-icons": "^0.7.1"
+    "angular-material-icons": "^0.7.1",
+    "highcharts-ng": "^0.0.12"
   },
   "devDependencies": {
     "angular": "1.5.8"

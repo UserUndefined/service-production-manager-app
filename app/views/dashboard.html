@@ -1,20 +1,20 @@
 <md-content class="md-padding" layout-xs="column" layout="row">
-    <md-card>
-        <img ng-src="images/mouseandpaperwork.jpg" class="md-card-image" alt="Office Desktop">
-        <md-card-content>
-            <p>{{stats.receiptsLastSevenDays}} receipts entered in the last 7 days</span>
-        </md-card-content>
-        <md-card-actions layout="row" layout-align="start center">
-            <md-button ng-click="navigateToList()">View All Receipts</md-button>
-        </md-card-actions>
-    </md-card>
-    <md-card>
-        <img ng-src="images/calculatorandpen.jpg" class="md-card-image" alt="Office Desktop Calculator">
-        <md-card-content>
-            <p>{{stats.receiptsLastMonth}} receipts entered in the last month</span>
-        </md-card-content>
-        <md-card-actions layout="row" layout-align="start center">
-            <md-button ng-click="navigateToList()">View All Receipts</md-button>
-        </md-card-actions>
-    </md-card>
+    <div flex-xs flex-gt-xs="50" layout="column">
+        <md-card>
+            <md-card-content>
+                <div>
+                    <highchart id="weekOrdersChart" config="weekOrdersConfig"></highchart>
+                </div>
+            </md-card-content>
+        </md-card>
+    </div>
+    <div flex-xs flex-gt-xs="50" layout="column">
+        <md-card>
+            <md-card-content>
+                <div>
+                    <highchart id="statusCountChart" config="statusCountConfig"></highchart>
+                </div>
+            </md-card-content>
+        </md-card>
+    </div>
 </md-content>

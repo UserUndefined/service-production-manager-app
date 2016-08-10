@@ -10,7 +10,7 @@
   $templateCache.put("views/customerSearch.html",
     "<md-content layout=row layout-align=center><div layout-fill flex-gt-xs=66><div layout-align=center><form name=customerSearchForm layout=column><md-input-container class=md-block><label>Search</label><input name=customerSearch class=validate ng-model=customer.searchText></md-input-container><md-button ng-click=searchCustomers() ng-disabled=\"customer.searchText == ''\" class=\"md-raised md-primary\">Search</md-button></form></div></div></md-content>");
   $templateCache.put("views/dashboard.html",
-    "<md-content class=md-padding layout-xs=column layout=row><md-card><img ng-src=images/mouseandpaperwork.jpg class=md-card-image alt=\"Office Desktop\"><md-card-content><p>{{stats.receiptsLastSevenDays}} receipts entered in the last 7 days</p></md-card-content><md-card-actions layout=row layout-align=\"start center\"><md-button ng-click=navigateToList()>View All Receipts</md-button></md-card-actions></md-card><md-card><img ng-src=images/calculatorandpen.jpg class=md-card-image alt=\"Office Desktop Calculator\"><md-card-content><p>{{stats.receiptsLastMonth}} receipts entered in the last month</p></md-card-content><md-card-actions layout=row layout-align=\"start center\"><md-button ng-click=navigateToList()>View All Receipts</md-button></md-card-actions></md-card></md-content>");
+    "<md-content class=md-padding layout-xs=column layout=row><div flex-xs flex-gt-xs=50 layout=column><md-card><md-card-content><div><highchart id=weekOrdersChart config=weekOrdersConfig></highchart></div></md-card-content></md-card></div><div flex-xs flex-gt-xs=50 layout=column><md-card><md-card-content><div><highchart id=statusCountChart config=statusCountConfig></highchart></div></md-card-content></md-card></div></md-content>");
   $templateCache.put("views/directives/currentUser.html",
     "<i class=material-icons>perm_identity</i>");
   $templateCache.put("views/login.html",
@@ -18,7 +18,7 @@
   $templateCache.put("views/orderNew.html",
     "<md-content layout=column layout-align=center><div><p>{{order.customer.name}}, {{order.customer.postcode}}</p></div><md-divider></md-divider><form name=newServiceForm><div layout-gt-xs=row><div flex=30><md-input-container><md-select ng-model=newItem.product placeholder=\"Select a product\"><md-option ng-value=serviceProduct.product ng-repeat=\"serviceProduct in serviceProducts\">{{ serviceProduct.product.name }}</md-option></md-select></md-input-container></div><div flex=30><md-input-container><md-select ng-model=newItem.area placeholder=\"Select an area\"><md-option ng-value=area.name ng-repeat=\"area in areas\">{{ area.name }}</md-option></md-select></md-input-container></div><div flex=30><md-input-container><md-select ng-model=newItem.heading placeholder=\"Select a heading\"><md-option ng-value=heading.name ng-repeat=\"heading in headings\">{{ heading.name }}</md-option></md-select></md-input-container></div><div flex=10><md-input-container><div><ng-md-icon icon=add_circle size=36 ng-click=addNewService()></ng-md-icon></div></md-input-container></div></div></form><md-divider ng-if=\"order.totalValue > 0\"></md-divider><div layout=column layout-fill><md-list><md-list-item class=\"md-3-line noright\" ng-repeat=\"service in order.services\"><ng-md-icon icon={{service.product.options.icon}} size=36 ng-click=removeService(service)></ng-md-icon><div class=md-list-item-text ng-class=\"{'md-offset': service.options.offset }\"><h3>{{ service.product.name }}</h3><p>{{ service.heading }}</p><p>{{ service.area }}</p></div><div class=md-secondary><p>£{{service.product.price}}</p><ng-md-icon icon=clear size=36 ng-click=removeService(service) style=fill:pink></ng-md-icon></div></md-list-item></md-list><md-divider></md-divider><div layout=row layout-align=end><div flex=50></div><div flex=25><p>Total:</p></div><div flex=nogrow><p>£{{order.totalValue}}</p></div></div><md-divider></md-divider><md-button ng-disabled=\"order.totalValue == 0\" class=\"md-raised md-primary\">Save Order</md-button></div></md-content>");
 }]);
-;angular.module('app', ['appTemplates', 'ui.router', 'config', 'restangular', 'angularSpinner', 'cgNotify', 'ipCookie', 'ngFileSaver','ngMaterial', 'lfNgMdFileInput', 'ngMessages', 'ngMdIcons','ngAnimate'])
+;angular.module('app', ['appTemplates', 'ui.router', 'config', 'restangular', 'angularSpinner', 'cgNotify', 'ipCookie', 'ngFileSaver','ngMaterial', 'lfNgMdFileInput', 'ngMessages', 'ngMdIcons','ngAnimate', 'highcharts-ng'])
 
     .run(['$rootScope', '$state', '$stateParams', function ($rootScope, $state, $stateParams) {
         $rootScope.$state = $state;
@@ -195,6 +195,94 @@ angular.module('app')
             $scope.stats = {
                 receiptsLastSevenDays: 5,
                 receiptsLastMonth: 23
+            };
+
+            $scope.weekOrdersConfig = {
+                options: {
+                    chart: {type: 'line'},
+                    tooltip: {style: {padding: 10,fontWeight: 'bold'}
+                    }
+                },
+                series: [{
+                    name: 'Number of Orders',
+                    data: [10, 15, 12, 8, 7, 0, 0],
+                    color: '#0675c2'
+                }],
+                title: {text: 'Orders Per Day'},
+                loading: false,
+                xAxis: {
+                    tickColor: '#fff',
+                    title: {text: 'Day'},
+                    categories: [
+                        'Mon',
+                        'Tue',
+                        'Wed',
+                        'Thu',
+                        'Fri',
+                        'Sat',
+                        'Sun']
+                },
+                labels: {
+                    formatter: function () {
+                        return "<a ng-click='xLabelClick()'>" + this.value + "</a>";
+                    },
+                    useHTML: true
+                },
+                legend: {y: 5},
+                useHighStocks: false
+            };
+
+            $scope.statusCountConfig = {
+                options: {
+                    chart: {type: 'pie'},
+                    tooltip: {style: {padding: 10,fontWeight: 'bold'}}},
+                series: [{
+                    name: 'Status',
+                    colorByPoint: true,
+                    data: [{
+                        name: 'Pending',
+                        y: 10
+                    }, {
+                        name: 'SEO Production',
+                        y: 8
+                    }, {
+                        name: 'Website Production',
+                        y: 6
+                    }, {
+                        name: 'On Hold',
+                        y: 5
+                    }, {
+                        name: 'Fault',
+                        y: 1
+                    }, {
+                        name: 'Back to Rep',
+                        y: 2
+                    }, {
+                        name: 'Complete',
+                        y: 25
+                    }]}],
+                title: {text: 'Production Status'},
+                loading: false,
+                xAxis: {
+                    tickColor: '#fff',
+                    title: {text: 'Day'},
+                    categories: [
+                        'Pending',
+                        'Seo Production',
+                        'Website Production',
+                        'On Hold',
+                        'Fault',
+                        'Back to Rep',
+                        'Complete']
+                },
+                labels: {
+                    formatter: function () {
+                        return "<a ng-click='xLabelClick()'>" + this.value + "</a>";
+                    },
+                    useHTML: true
+                },
+                legend: {y: 5},
+                useHighStocks: false
             };
         }
 
