@@ -275,6 +275,7 @@ module.exports = function (grunt) {
                 },
                 dist: {
                     src: [
+                        '<%= config.app %>/bower_components/angular/angular.min.js',
                         '<%= config.tmp %>/<%= config.scripts %>/bower_comp.js',
                         '<%= config.tmp %>/<%= config.scripts %>/config.js',
                         '<%= config.tmp %>/<%= config.scripts %>/appTemplates.js',
@@ -345,7 +346,11 @@ module.exports = function (grunt) {
                     dest: {
                         'js': '<%= config.tmp %>/<%= config.scripts %>/bower_comp.js',
                         'css': '<%= config.tmp %>/<%= config.styles %>/bower_comp.css'
-                    }
+                    },
+                    bowerOptions: {
+                        relative: false
+                    },
+                    options: { separator : ';' }
                 }
             },
             htmlmin: {
@@ -450,11 +455,11 @@ module.exports = function (grunt) {
     grunt.registerTask('build', function () {
         grunt.task.run([
             'clean:build',
-            'buildProduction',
-            'buildStaging',
-            'buildQa',
-            'buildDev',
-            'clean:dist'
+            //'buildProduction',
+            //'buildStaging',
+            //'buildQa',
+            'buildDev'
+            //'clean:dist'
         ]);
     });
 
